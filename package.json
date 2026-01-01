@@ -1,0 +1,7 @@
+{
+  "name": "hellfire-dnd",
+  "private": true,
+  "scripts": {
+    "dev:ui": "npm --prefix ui run dev"
+  }
+}
