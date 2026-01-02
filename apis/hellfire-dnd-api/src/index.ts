@@ -21,7 +21,7 @@ export default class APPLICATION {
     private app: Application = express();
     private PORT = process.env.PORT || 5000;
 
-    // Called after DI is setup from the startup.ts file
+    // Called after DI is set up from the startup.ts file
     constructor(
         private databaseService: DatabaseService,
         private mainControllers: MainControllers,
@@ -38,7 +38,7 @@ export default class APPLICATION {
     }
 
     private SetupExpress(): void {
-        console.log("connected to database, continue startup");
+        console.log("Configuration complete, continuing startup process");
 
         // Force https routing
         this.app.use(sslRedirect());

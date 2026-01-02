@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { createClient, TimeSeriesAggregationType } from "redis";
+import {createClient, TIME_SERIES_AGGREGATION_TYPE} from "redis";
 import { ENVIRONMENT } from "../environment";
 
 @Service()
@@ -17,10 +17,11 @@ export default class RedisService {
 	constructor() {}
 
 	public async setupRedis(): Promise<void> {
+		if (ENVIRONMENT.REDIS_HOST === "NO_REDIS_HOST") return;
 		if (this.connected) return;
 		this.connected = true;
 		this.redisClient.on("connect", () => console.log("REDIS CONNECTING"));
-		this.redisClient.on("error", (err) => this.handleError(err));
+		this.redisClient.on("error", (err: string) => this.handleError(err));
 		this.redisClient.on("ready", () => this.handleConnected());
 		await this.redisClient.connect();
 	}
@@ -62,7 +63,7 @@ export default class RedisService {
 		try {
 			const resp = await this.redisClient.ts.RANGE(metric, from, to, {
 				AGGREGATION: {
-					type: TimeSeriesAggregationType.SUM,
+					type: TIME_SERIES_AGGREGATION_TYPE.SUM,
 					timeBucket: span,
 					EMPTY: true,
 				},

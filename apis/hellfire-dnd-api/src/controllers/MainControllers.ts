@@ -21,6 +21,6 @@ export default class MainControllers implements IController {
 		// Add controllers here to register with the application
 		this.rootController.RegisterEndpoint(app);
 
-		console.log("Registered Controllers");
+		console.log("Registered Controllers ✅ ");
 	}
 }

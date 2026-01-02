@@ -3,5 +3,12 @@
   "private": true,
   "scripts": {
     "dev:ui": "npm --prefix ui run dev"
+  },
+  "dependencies": {
+    "@redis/time-series": "^5.10.0",
+    "pg": "^8.16.3",
+    "redis": "^5.10.0",
+    "request-context": "^2.0.0",
+    "typeorm": "^0.3.28"
   }
 }

@@ -2,34 +2,40 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
 import { Container } from "typedi";
-import MA_APPLICATION from ".";
+import APPLICATION from ".";
 import path from "path";
 import { ENVIRONMENT } from "./environment";
+
+console.log('####################################################')
+console.log('-------------------- STARTUP -----------------------')
+console.log('####################################################')
 
 export default class Startup {
     constructor() { }
 
     public Build(): string {
         // configure env
-        if (process.env.NODE_ENV !== "production") dotenv.config({ path: path.resolve(__dirname, "../.env") });
+        if (process.env.NODE_ENV !== "production") {
+            dotenv.config({
+                path: path.resolve(__dirname, "../../.env"),
+                quiet: true
+            });
+        }
         
-        // if (process.env.LOGSNAG == undefined) return ENVIRONMENT.LOGSNAG;
-        if (process.env.REDIS_HOST == undefined) return ENVIRONMENT.REDIS_HOST;
-        if (process.env.REDIS_PASSWORD == undefined) return ENVIRONMENT.REDIS_PASSWORD;
+        console.log('redis disabled, to enable update startup.ts')
+        // if (process.env.REDIS_HOST == undefined) return ENVIRONMENT.REDIS_HOST;
+        // if (process.env.REDIS_PASSWORD == undefined) return ENVIRONMENT.REDIS_PASSWORD;
         
-        // ENVIRONMENT.LOGSNAG = process.env.LOGSNAG;
-        ENVIRONMENT.REDIS_HOST = process.env.REDIS_HOST;
-        ENVIRONMENT.REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+        // ENVIRONMENT.REDIS_HOST = process.env.REDIS_HOST;
+        // ENVIRONMENT.REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 
-        console.log("THIS IS DEPLOYMENT", process.env.SOURCE_VERSION);
-        console.log("CONFIGURED LOGSNAG", ENVIRONMENT.LOGSNAG.substring(0, 9));
-
-        console.log(`Startup called, running: ${process.env.ENV_NAME} :: process: ${process.pid}`);
+        if (process.env.NODE_ENV === 'production') console.log("THIS IS DEPLOYMENT", process.env.SOURCE_VERSION);
+        console.log(`Running: ${process.env.ENV_NAME} :: process: ${process.pid}`);
         return "COMPLETE";
     }
 
     public Run(): void {
-        Container.get(MA_APPLICATION);
+        Container.get(APPLICATION);
     }
 }
 

@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { DataSource, EntitySchema, MixedList } from "typeorm";
+import {DataSource, DataSourceOptions, EntitySchema, MixedList} from "typeorm";
 
 // register entites here
 const APP_ENTITIES: MixedList<string | Function | EntitySchema<any>> = [
@@ -10,13 +10,13 @@ export default class DatabaseService {
 	private _dataSource: DataSource;
 
 	public get postgresSource() {
-		if (this._dataSource == null)
-			this._dataSource = new DataSource({
+		if (this._dataSource == null) {
+			const conf = {
 				type: "postgres",
-				host: process.env.DATABASE_HOST,
-				username: process.env.DATABASE_USERNAME,
-				password: process.env.DATABASE_PASSWORD,
-				database: process.env.DATABASE_NAME,
+				host: process.env.DB_HOST,
+				username: process.env.DB_USER,
+				password: process.env.DB_PASSWORD,
+				database: process.env.DB_NAME,
 				port: 5432,
 				synchronize: process.env.ENV_NAME === "LOCAL", // only synchronize in development
 				logging: false,
@@ -28,7 +28,9 @@ export default class DatabaseService {
 						rejectUnauthorized: false,
 					},
 				},
-			});
+			} as DataSourceOptions;
+			this._dataSource = new DataSource(conf);
+		}
 
 		return this._dataSource;
 	}
@@ -38,9 +40,12 @@ export default class DatabaseService {
 			console.log("DATABASE SERVICE: Connecting to database");
 			this.postgresSource
 				.initialize()
-				.then(() => success())
+				.then(() => {
+					console.log("Connected to database ✅");
+					success();
+				})
 				.catch((error) => console.log(error));
-		} catch (exception: any) {
+		} catch (exception: unknown) {
 			console.log("DATABASE SERVICE ERROR:", exception);
 			success();
 		}
