@@ -2,6 +2,7 @@ import { Application } from "express";
 import { Service } from "typedi";
 import RootController from "./RootController";
 import IController from "../interfaces/IController";
+import AuthController from "./AuthController";
 
 /*
   This controller will register all of the child controllers, 
@@ -14,12 +15,14 @@ export default class MainControllers implements IController {
 	// and register it in the app.
 	constructor(
 		private rootController: RootController,
+		private authController: AuthController
 	) { }
 
 	/* Call from index to register endpoints from other controllers */
 	public RegisterEndpoint(app: Application): void {
 		// Add controllers here to register with the application
 		this.rootController.RegisterEndpoint(app);
+		this.authController.RegisterEndpoint(app);
 
 		console.log("Registered Controllers ✅ ");
 	}

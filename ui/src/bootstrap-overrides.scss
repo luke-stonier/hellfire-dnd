@@ -1,0 +1,48 @@
+﻿@use "sass:color";
+
+// ===============================
+// Hellfire Dark Theme (Bootstrap)
+// ===============================
+
+// Brand / Identity
+$primary:   #DE0B0A; // Hellfire red (logo, headers, emphasis)
+$secondary: #c2410c; // Burnt ember orange (events, highlights)
+
+// Status
+$danger:  #ff3b30;   // Alarm red (errors, irreversible actions)
+$warning: #f59e0b;   // Ember warning
+$success: #15803d;   // Muted, grounded green
+$info:    #38bdf8;   // Cold contrast (use sparingly)
+
+// Surfaces
+$dark:     #070707;  // Near-black base
+$light:    #e7e5e4;  // Bone / parchment text
+
+// Body
+$body-bg:    $dark;
+$body-color: $light;
+
+// Borders & dividers
+$border-color: #1f1f1f;
+
+// Links
+$link-color:       $secondary;
+$link-hover-color: color.scale($secondary, $lightness: 10%);
+
+// Buttons
+$btn-border-radius: .5rem;
+
+// Forms
+$input-bg:                    #0a0a0a;
+$input-border-color:          #262626;
+$input-color:                $light;
+$input-focus-border-color:   $secondary;
+
+// Cards / modals
+$card-bg:           #0a0a0a;
+$card-border-color: #1f1f1f;
+
+// ===============================
+// Import Bootstrap
+// ===============================
+@import "bootstrap/scss/bootstrap";

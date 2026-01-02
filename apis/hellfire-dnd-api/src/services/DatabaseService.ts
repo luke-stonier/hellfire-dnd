@@ -1,8 +1,16 @@
 import { Service } from "typedi";
 import {DataSource, DataSourceOptions, EntitySchema, MixedList} from "typeorm";
+import {User} from "../Entities/User";
+import {UserSession} from "../Entities/UserSession";
+import {Party} from "../Entities/Party";
+import {PartyMember} from "../Entities/PartyMember";
 
 // register entites here
 const APP_ENTITIES: MixedList<string | Function | EntitySchema<any>> = [
+	User,
+	UserSession,
+	Party,
+	PartyMember,
 ];
 
 @Service()
@@ -29,6 +37,7 @@ export default class DatabaseService {
 					},
 				},
 			} as DataSourceOptions;
+			if (conf.synchronize) console.log('Synchronizing Database - Migration running');
 			this._dataSource = new DataSource(conf);
 		}
 

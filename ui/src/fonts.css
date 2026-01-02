@@ -1,0 +1,112 @@
+﻿@font-face {
+    font-family: "ITC Benguiat Std";
+    src: url("./assets/fonts/itc-benguiat-std/ITCBenguiatStdBookCnIt.OTF") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITC Benguiat Std";
+    src: url("./assets/fonts/itc-benguiat-std/ITCBenguiatStdMediumCn.OTF") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITC Benguiat Std";
+    src: url("./assets/fonts/itc-benguiat-std/ITCBenguiatStdMediumCnIt.OTF") format("opentype");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITC Benguiat Std";
+    src: url("./assets/fonts/itc-benguiat-std/ITCBenguiatStdBoldCn.OTF") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITC Benguiat Std";
+    src: url("./assets/fonts/itc-benguiat-std/ITCBenguiatStdBoldCnIt.OTF") format("opentype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+/* 1) Global font for the entire site */
+:root {
+    --bs-font-sans-serif: "ITC Benguiat Std", serif;
+    --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+/* Make sure body and common components inherit properly */
+body,
+button,
+input,
+textarea,
+select {
+    font-family: var(--bs-body-font-family), serif !important;
+}
+
+/* Optional: tighten headings a touch for the vibe */
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+    letter-spacing: 0.02em;
+}
+
+/* 2) Bootstrap-style utility extensions */
+
+/* --- Font family utilities (Bootstrap-like naming) --- */
+.ff-hellfire {
+    font-family: "ITC Benguiat Std", serif !important;
+}
+
+/* If you ever want to escape back to system font for dense UI areas */
+.ff-system {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+    sans-serif !important;
+}
+
+/* --- Font weight: keep Bootstrap fw-* but ensure mapping is consistent --- */
+/* Bootstrap already defines these; this just makes sure they win if needed. */
+.fw-light { font-weight: 300 !important; }  /* will synthesize (no 300 face) */
+.fw-normal { font-weight: 400 !important; } /* BookCn */
+.fw-medium { font-weight: 500 !important; } /* MediumCn */
+.fw-semibold { font-weight: 600 !important; } /* will synthesize */
+.fw-bold { font-weight: 700 !important; }   /* BoldCn */
+.fw-bolder { font-weight: 800 !important; } /* will synthesize */
+
+/* --- Text style utilities (Bootstrap-like) --- */
+.text-italic { font-style: italic !important; }
+.text-upright { font-style: normal !important; }
+
+/* --- Letter spacing utilities (Bootstrap-like) --- */
+.ls-0   { letter-spacing: 0 !important; }
+.ls-1   { letter-spacing: 0.01em !important; }
+.ls-2   { letter-spacing: 0.02em !important; }
+.ls-3   { letter-spacing: 0.03em !important; }
+
+/* --- Text transform utilities (Bootstrap has some, but adding explicit set) --- */
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+/* 3) Make Bootstrap components inherit font cleanly */
+.btn,
+.nav-link,
+.dropdown-item,
+.form-control,
+.form-select,
+.input-group-text,
+.modal-title,
+.alert,
+.badge {
+    font-family: inherit !important;
+}
