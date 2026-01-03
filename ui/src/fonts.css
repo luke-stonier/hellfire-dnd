@@ -60,6 +60,11 @@ h1, h2, h3, h4, h5, h6,
     letter-spacing: 0.02em;
 }
 
+h1, h2, h3, h4, h5, h6, a, p, span {
+    transform: translateY(.2em);
+    line-height: 80% !important;
+}
+
 /* 2) Bootstrap-style utility extensions */
 
 /* --- Font family utilities (Bootstrap-like naming) --- */
